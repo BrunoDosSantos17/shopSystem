@@ -1,4 +1,4 @@
-package entities;
+package com.bruno.shopSystem.entities;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -13,6 +13,10 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.password = password;
+    }
+
+    public User() {
+
     }
 
     @Id

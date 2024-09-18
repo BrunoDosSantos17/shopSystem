@@ -1,6 +1,6 @@
-package repositories;
+package com.bruno.shopSystem.repositories;
 
-import entities.User;
+import com.bruno.shopSystem.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

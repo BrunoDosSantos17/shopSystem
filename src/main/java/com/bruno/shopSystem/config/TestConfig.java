@@ -1,11 +1,11 @@
-package config;
+package com.bruno.shopSystem.config;
 
-import entities.User;
+import com.bruno.shopSystem.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import repositories.UserRepository;
+import com.bruno.shopSystem.repositories.UserRepository;
 
 import java.util.Arrays;
 
