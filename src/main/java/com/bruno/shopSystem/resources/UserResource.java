@@ -16,10 +16,11 @@ import java.util.List;
 public class UserResource {
 
     @Autowired
-    UserServices userServices;
+    private UserServices userServices;
     @GetMapping
     public ResponseEntity<List<User>> findAll() {
-        return ResponseEntity.ok(userServices.findAll());
+        List<User> list = userServices.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/{id}")

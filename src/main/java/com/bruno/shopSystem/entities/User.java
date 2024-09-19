@@ -1,30 +1,40 @@
 package com.bruno.shopSystem.entities;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import lombok.*;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_user")
-public class User {
-    public User(Integer id, String name, String email, String phone, String password) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.password = password;
-    }
-
-    public User() {
-
-    }
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    @Getter
+    private Integer id;
 
-    String name;
-    String email;
-    String phone;
-    String password;
+    @Getter
+    @Setter
+    private String name;
+
+    @Getter
+    @Setter
+    private String email;
+
+    @Getter
+    @Setter
+    private String phone;
+
+    @Getter
+    @Setter
+    private String password;
+
+    @OneToMany(mappedBy = "client")
+    @Getter
+    private List<Order> orders = new ArrayList<>();
 }

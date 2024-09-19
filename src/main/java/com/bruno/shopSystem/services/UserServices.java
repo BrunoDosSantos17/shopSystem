@@ -12,10 +12,9 @@ import java.util.Optional;
 public class UserServices {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     public List<User> findAll() {
-        List<User> users = userRepository.findAll();
-        return users;
+        return userRepository.findAll();
     }
 
     public User findById(Long id) {
