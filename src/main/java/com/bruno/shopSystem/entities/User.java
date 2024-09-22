@@ -1,5 +1,6 @@
 package com.bruno.shopSystem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class User implements Serializable {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +39,15 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "client")
     @Getter
+    @JsonIgnore
     private List<Order> orders = new ArrayList<>();
+
+    @Builder
+    public User(Integer id, String name, String email, String phone, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+    }
 }
