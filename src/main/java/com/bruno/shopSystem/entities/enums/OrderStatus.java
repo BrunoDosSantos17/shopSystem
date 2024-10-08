@@ -2,7 +2,6 @@ package com.bruno.shopSystem.entities.enums;
 
 import lombok.Getter;
 
-import java.util.Arrays;
 
 public enum OrderStatus {
     WAITING_PAYMENT(1),
