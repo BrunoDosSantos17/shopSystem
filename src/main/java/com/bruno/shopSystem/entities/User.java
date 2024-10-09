@@ -38,8 +38,9 @@ public class User implements Serializable {
     private String password;
 
     @OneToMany(mappedBy = "client")
-    @Getter
     @JsonIgnore
+    @Getter
+    
     private List<Order> orders = new ArrayList<>();
 
     @Builder

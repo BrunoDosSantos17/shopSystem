@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -30,6 +32,10 @@ public class Order {
     private User client;
 
     private Integer orderStatus;
+
+    @Getter
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
 
     public Order(Integer id, Instant moment, OrderStatus orderStatus, User client ) {
