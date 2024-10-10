@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_product")
 @NoArgsConstructor
@@ -32,6 +34,16 @@ public class Product implements Serializable {
     @Getter
     @Setter
     private String imgUrl;
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
+
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        items.stream().forEach(x -> set.add(x.getOrder()));
+        return set;
+    }
 
 
     @Getter
