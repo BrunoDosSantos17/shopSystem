@@ -37,6 +37,11 @@ public class Order {
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @Setter
+    @Getter
+    private Payment payment;
+
 
     public Order(Integer id, Instant moment, OrderStatus orderStatus, User client ) {
         super();
@@ -53,5 +58,12 @@ public class Order {
         if(orderStatus != null) {
             this.orderStatus = orderStatus.getCode();
         }
+    }
+
+    public Double getTotal() {
+        double sum = 0.0;
+
+        sum = getItems().stream().mapToDouble(OrderItem::getSubTotal).sum();
+        return sum;
     }
 }
