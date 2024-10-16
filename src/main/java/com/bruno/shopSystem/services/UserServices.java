@@ -5,6 +5,9 @@ import com.bruno.shopSystem.repositories.UserRepository;
 import com.bruno.shopSystem.services.exceptions.DatabaseException;
 import com.bruno.shopSystem.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
+import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,6 +21,7 @@ public class UserServices {
 
     @Autowired
     private UserRepository userRepository;
+
     public List<User> findAll() {
         return userRepository.findAll();
     }
@@ -33,18 +37,22 @@ public class UserServices {
 
     public void delete(Long id) {
         try {
+            findById(id);
             userRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException(id);
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException(e.getMessage());
         }
     }
 
     public User update(Long id, User user) {
-        User entity = userRepository.getReferenceById(id);
-        updateData(entity, user);
-        return userRepository.save(entity);
+        try {
+            User entity = userRepository.getReferenceById(id);
+            updateData(entity, user);
+            return userRepository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
+
     }
 
     private void updateData(User entity, User user) {

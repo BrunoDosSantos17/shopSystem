@@ -27,7 +27,7 @@ public class ResourceExceptionHandler implements Serializable{
     }
     
     @ExceptionHandler(DatabaseException.class)
-    public ResponseEntity<StandardError> database(ResourceNotFoundException e, jakarta.servlet.http.HttpServletRequest request) {
+    public ResponseEntity<StandardError> database(DatabaseException e, jakarta.servlet.http.HttpServletRequest request) {
         String error = "Database error";
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
